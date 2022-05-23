@@ -22,6 +22,7 @@ out/
 *.log
 .serverless
 Thumbs.db
+!/account-details/account-details.gradle
 !/build.gradle
 !/.github/pull_request_template.md
 !/.github/CODEOWNERS
