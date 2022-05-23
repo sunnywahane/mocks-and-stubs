@@ -1,0 +1,52 @@
+subprojects {
+    apply(plugin: 'jacoco')
+    apply(plugin: 'dev.medly.repos')
+    apply(plugin: 'dev.medly.kotlin')
+
+    dependencies {
+        testImplementation "io.kotest:kotest-runner-junit5-jvm:5.3.0"
+    }
+}
+
+jacoco {
+    toolVersion "0.8.7"
+}
+
+detekt {
+    toolVersion = "1.20.0"
+    input = files("anagram-checker/src")
+    parallel = false
+    config = files("detekt.yml")
+    buildUponDefaultConfig = false
+    disableDefaultRuleSets = true
+    debug = true
+    ignoreFailures = false
+}
+
+tasks.named("detekt").configure {
+    reports {
+        xml.required.set(true)
+        xml.outputLocation.set(file("build/reports/detekt.xml"))
+    }
+}
+
+task codeCoverageReport(type: JacocoReport) {
+    // Gather execution data from all subprojects
+    executionData fileTree(project.rootDir.absolutePath).include("**/build/jacoco/*.exec")
+
+    // Add all relevant sourcesets from the subprojects
+    subprojects.each {
+        sourceSets it.sourceSets.main
+    }
+
+    reports {
+        xml.enabled true
+        html.enabled true
+        csv.enabled false
+    }
+}
+
+// always run the tests before generating the report
+codeCoverageReport.dependsOn {
+    subprojects*.test
+}

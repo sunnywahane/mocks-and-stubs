@@ -1,0 +1,28 @@
+{
+  "type": "@medlypharmacy/kotlin-projen.KotlinProject",
+  "name": "kotlin-template",
+  "rootProject": {
+    "features": [
+      "repos",
+      "extension"
+    ],
+    "plugins": [
+      {
+        "name": "dev.medly.kotlin",
+        "version": "0.0.9",
+        "apply": false
+      },
+      {
+        "name": "jacoco"
+      },
+      {
+        "name": "org.jlleitschuh.gradle.ktlint",
+        "version": "9.2.1"
+      },
+      {
+        "name": "io.gitlab.arturbosch.detekt",
+        "version": "1.20.0"
+      }
+    ]
+  }
+}
