@@ -7,7 +7,7 @@ class UserServiceTest: StringSpec() {
 
     init {
         "testing welcome email service" {
-            val dummyService = dummyEmailService()
+            val dummyService = DummyEmailService()
             val userService = UserService(null, dummyService)
             userService.sendWelcomeEmail("test@gmail.com")
             val expectedEmailBody = EmailBody("Welcome", "Welcome to the portal", "test@gmail.com")
