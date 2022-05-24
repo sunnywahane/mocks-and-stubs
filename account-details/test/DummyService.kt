@@ -1,8 +1,7 @@
 import models.EmailBody
 import service.EmailService
-import java.io.File
 
-class dummyEmailService : EmailService {
+class DummyEmailService : EmailService {
 
     var lastEmailBody: EmailBody? = null
 
